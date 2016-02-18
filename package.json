@@ -5,11 +5,21 @@
   "repository": "rista404/coedu",
   "main": "src/main.js",
   "scripts": {
-    "start": "electron src/main.js"
+    "start": "parallelshell \"npm run dev:sass\" \"npm run dev:jade\" \"npm run app\"",
+    "app": "electron src/main.js",
+    "dev:jade": "jade --pretty -w src/index.jade -o dist",
+    "dev:sass": "node-sass -i -w src/styles/main.sass -o dist/css ",
+    "clean": "rm -rf dist/css dist/js dist/index.html",
+    "build": "npm run clean; mkdir dist/css dist/js; npm run build:jade; npm run build:sass;",
+    "build:jade": "jade src -o dist",
+    "build:sass": "node-sass -i --output-style compressed src/styles/main.sass -o dist/css"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "electron-prebuilt": "^0.36.7"
+    "electron-prebuilt": "^0.36.7",
+    "jade": "^1.11.0",
+    "node-sass": "^3.4.2",
+    "parallelshell": "^2.0.0"
   }
 }
