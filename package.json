@@ -1,7 +1,8 @@
 {
   "name": "coedu",
   "version": "0.0.1",
-  "description": "",
+  "description": "Simple app that incorporates git and github into classroms!",
+  "repository": "rista404/coedu",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
