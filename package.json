@@ -12,14 +12,16 @@
     "clean": "rm -rf dist/css dist/js dist/index.html",
     "build": "npm run clean; mkdir dist/css dist/js; npm run build:jade; npm run build:sass;",
     "build:jade": "jade src -o dist",
-    "build:sass": "node-sass -i --output-style compressed src/styles/main.sass -o dist/css"
+    "build:sass": "node-sass -i --output-style compressed src/styles/main.sass | postcss --use autoprefixer -o dist/css/main.css"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "autoprefixer": "^6.3.3",
     "electron-prebuilt": "^0.36.7",
     "jade": "^1.11.0",
     "node-sass": "^3.4.2",
-    "parallelshell": "^2.0.0"
+    "parallelshell": "^2.0.0",
+    "postcss-cli": "^2.5.1"
   }
 }
