@@ -5,8 +5,11 @@
   "repository": "rista404/coedu",
   "main": "src/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "electron src/main.js"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "electron-prebuilt": "^0.36.7"
+  }
 }
