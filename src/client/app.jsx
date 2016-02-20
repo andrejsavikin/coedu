@@ -6,7 +6,7 @@ import Username from './components/username.jsx';
 class MainView extends React.Component {
 	render() {
 		return (
-			<div><Username name="Nikola" /></div>
+			<div><Username name="Rista" /></div>
 		);
 	}
 }

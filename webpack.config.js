@@ -2,7 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
  
 module.exports = {
-  entry: './src/app.jsx',
+  entry: './src/client/app.jsx',
   output: { path: __dirname + '/dist/js/', filename: 'app.min.js' },
   module: {
     loaders: [
