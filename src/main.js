@@ -10,7 +10,15 @@ let mainWindow;
 
 function createWindow () {
 	// Create the browser window
-	mainWindow = new BrowserWindow({width: 340, height: 400});
+	mainWindow = new BrowserWindow({
+		width: 340,
+		height: 400,
+		resizable: false,
+		fullscreen: false,
+		title: "Coedu",
+		frame: true, // to be done
+		titleBarStyle: "hidden"
+	});
 
 	// and load the index.html of the app
 	mainWindow.loadURL('file://' + __dirname + '/../dist/index.html');
