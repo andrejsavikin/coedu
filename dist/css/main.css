@@ -147,5 +147,17 @@ table {
 td, th {
   padding: 0; }
 
-h1 {
-  font-family: monospace; }
+html, body {
+  height: 100%; }
+
+#app, .View {
+  height: 100%; }
+
+.Login {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; }
+  .Login img {
+    margin: 0 auto;
+    max-width: 220px; }
