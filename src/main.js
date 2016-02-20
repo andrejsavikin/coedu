@@ -9,8 +9,8 @@ const BrowserWindow = electron.BrowserWindow;
 let mainWindow;
 
 function createWindow () {
-	// Create the browser window
-	mainWindow = new BrowserWindow({
+
+	const defaultWindowConfig = {
 		width: 340,
 		height: 400,
 		resizable: false,
@@ -18,7 +18,9 @@ function createWindow () {
 		title: "Coedu",
 		frame: true, // to be done
 		titleBarStyle: "hidden"
-	});
+	};
+	// Create the browser window
+	mainWindow = new BrowserWindow(defaultWindowConfig);
 
 	// and load the index.html of the app
 	mainWindow.loadURL('file://' + __dirname + '/../dist/index.html');
