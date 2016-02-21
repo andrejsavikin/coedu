@@ -8,6 +8,7 @@ render() {
       	<Link to={`/`}>
       	  <img className="logout" src={"images/logout.svg"} />
       	</Link>
+      	<span className="user-info">Nikola Ristić ¬ III/12 ¬ ETŠ Nikola Tesla</span>
       </footer>
     );
   }

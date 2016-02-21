@@ -6,9 +6,10 @@ export default class ReposList extends React.Component {
 	super();
 	this.state = {
 		data: [
-			{key: 0, name: "Cactomain", url: "https://github.com/vanjek/cactomain", path: "~/coedu/learning-git/"},
-			{key: 1, name: "Learning Git", url: "https://github.com/vanjek/learning"},
-			{key: 2, name: "Coedu Electron App", url: "https://github.com/rista404/coedu", path: "~/coedu/core/"}
+			{id: 0, name: "Cactomain", url: "https://github.com/vanjek/cactomain", path: "~/coedu/learning-git/"},
+			{id: 1, name: "Learning Git", url: "https://github.com/vanjek/learning"},
+			{id: 2, name: "Coedu Electron App", url: "https://github.com/rista404/coedu", path: "~/coedu/core/"},
+			{id: 3, name: "teslabg/maturski", url: "https://github.com/teslabg/maturski"},
 		]
 	}
   }
@@ -25,7 +26,7 @@ export default class ReposList extends React.Component {
 				if( b.path )
 					return 1;
 	  		}).map( repo => (
-  			<Repo key={repo.key} repo={repo} />
+  			<Repo key={repo.id} repo={repo} />
   			))
   		}
   		{this.props.children}
