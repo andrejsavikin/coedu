@@ -2,9 +2,9 @@ const Auth = {
 
 	login(cb) {
 		// If user is logged in
-		if( localStorage.user ) {
+		if( sessionStorage.user ) {
 			if(cb) cb(true);
-			this.onChange(true, JSON.parse(localStorage.getItem("user")));
+			this.onChange(true, JSON.parse(sessionStorage.getItem("user")));
 			console.log("Already logged in.");
 			return;
 		}
@@ -18,31 +18,31 @@ const Auth = {
 		};
 
 		// Pretend sucessfull login
-		localStorage.setItem("user", JSON.stringify( user ));
+		sessionStorage.setItem("user", JSON.stringify( user ));
 		console.log("Logged in!");
 		if (cb) cb(true);
-		this.onChange(true, JSON.parse(localStorage.getItem("user")));
+		this.onChange(true, JSON.parse(sessionStorage.getItem("user")));
 	},
 
 	logout(cb) {
-		delete localStorage.user;
+		delete sessionStorage.user;
 		if (cb) cb();
 		this.onChange(false);
 	},
 
 	getToken() {
-		if(!localStorage.user) return undefined;
+		if(!sessionStorage.user) return undefined;
 
-		return JSON.parse(localStorage.getItem("user")).token;
+		return JSON.parse(sessionStorage.getItem("user")).token;
 	},
 
 	getUser() {
-		return JSON.parse(localStorage.getItem("user"));
+		return JSON.parse(sessionStorage.getItem("user"));
 	},
 
 	loggedIn() {
-		if( !localStorage.user ) return undefined;
-		return !!localStorage.user;
+		if( !sessionStorage.user ) return undefined;
+		return !!sessionStorage.user;
 	},
 
 	onChange() {
