@@ -152,7 +152,8 @@ html, body {
   font-family: "Nunito", sans-serif; }
 
 #app, .View {
-  height: 100%; }
+  height: 100%;
+  position: relative; }
 
 a, a:focus, a:visited, a:active, a:hover {
   text-decoration: none; }
@@ -190,7 +191,7 @@ a, a:focus, a:visited, a:active, a:hover {
   padding: 40px 20px; }
 
 .Repo {
-  padding: 10px;
+  padding: 10px 0;
   cursor: pointer;
   border-bottom: 1px dotted #AFB2C3; }
   .Repo .Repo__Name {
@@ -207,3 +208,16 @@ a, a:focus, a:visited, a:active, a:hover {
     color: black; }
   .Repo.Repo--isCloned .Repo__Meta {
     color: #AFB2C3; }
+
+footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 10px; }
+  footer .logout {
+    cursor: pointer;
+    transition: all 0.2s;
+    opacity: 0.6; }
+    footer .logout:hover {
+      opacity: 1; }

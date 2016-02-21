@@ -13,7 +13,7 @@ export default class GithubButton extends React.Component {
   render() {
     return (
     	<Link to={`/repos`}>
-	      <div className="GithubButton" href={""}>
+	      <div className="GithubButton">
 	       <img className="GithubButton__Icon" src={"images/github-white.svg"} />
 	       <span className="GithubButton__Text">{this.props.cta}</span>
 	      </div>
