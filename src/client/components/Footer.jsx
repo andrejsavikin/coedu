@@ -7,19 +7,20 @@ export default class Footer extends React.Component {
 	};
 
 	render() {
-		let user = {
-			fullName: "Nikola Ristić",
-			username: "rista404",
-			team: "III/7",
-			organization: "ETŠ Nikola Tesla"
-		};
-		return (
-			<footer>
-				<Link to={`/`}>
-					<img className="logout" src={"images/logout.svg"} />
-				</Link>
-				<span className="user-info">{ user.fullName } ¬ { user.team } ¬ { user.organization }</span>
-			</footer>
-		);
+		let user = this.props.user;
+		if(user)
+			return (
+				<footer>
+					<Link to={`/`}>
+						<img className="logout" src={"images/logout.svg"} />
+					</Link>
+					<span className="user-info">{ user.fullName } ¬ { user.team } ¬ { user.organization }</span>
+				</footer>
+			);
+		else
+			return (
+				<footer>
+				</footer>
+			);
 	}
 }
