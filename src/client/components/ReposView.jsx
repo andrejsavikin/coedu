@@ -1,14 +1,14 @@
 import React from 'react';
+
+import View from './View.jsx';
 import ReposList from './ReposList.jsx';
-import Footer from './Footer.jsx';
 
 export default class ReposView extends React.Component {
-  render() {
-    return (
-      <div className="View">
-      	<ReposList />
-      	<Footer />
-      </div>
-    );
-  }
+	render() {
+		return (
+			<View>
+				<ReposList />
+			</View>
+		);
+	}
 }
