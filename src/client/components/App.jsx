@@ -1,14 +1,27 @@
 import React from 'react';
+import auth from '../auth.jsx';
+
 import Footer from './Footer.jsx';
 
 export default class App extends React.Component {
 	state = {
-		user: {
-			fullName: "Nikola Ristić",
-			username: "rista404",
-			team: "III/7",
-			organization: "ETŠ Nikola Tesla"
-		}
+		loggedIn: auth.loggedIn(),
+		user: auth.getUser()
+	}
+
+	constructor() {
+		super();
+	}
+
+	updateAuth(loggedIn, user) {
+		this.setState({
+			loggedIn,
+			user
+		});
+	}
+
+	componentWillMount() {
+		auth.onChange = this.updateAuth.bind(this);
 	}
 
 	render() {
