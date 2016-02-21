@@ -154,6 +154,9 @@ html, body {
 #app, .View {
   height: 100%; }
 
+a, a:focus, a:visited, a:active, a:hover {
+  text-decoration: none; }
+
 .Login {
   text-align: center;
   display: flex;
@@ -182,3 +185,25 @@ html, body {
     vertical-align: middle; }
   .GithubButton .GithubButton__Text {
     vertical-align: middle; }
+
+.ReposList {
+  padding: 40px 20px; }
+
+.Repo {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px dotted #AFB2C3; }
+  .Repo .Repo__Name {
+    font-size: 16px;
+    margin: 0;
+    padding: 3px 0;
+    font-weight: 300;
+    color: #AFB2C3; }
+  .Repo .Repo__Meta {
+    font-size: 12px;
+    font-family: "Roboto Mono", monospace;
+    color: #74ED42; }
+  .Repo.Repo--isCloned .Repo__Name {
+    color: black; }
+  .Repo.Repo--isCloned .Repo__Meta {
+    color: #AFB2C3; }
