@@ -28,7 +28,7 @@ export default class App extends React.Component {
 		return (
 			<div className="App View">
 				{ this.props.children }
-				<Footer user={this.state.user} />
+				<Footer user={this.state.user} loggedIn={this.state.loggedIn} />
 			</div>
 		);
 	}

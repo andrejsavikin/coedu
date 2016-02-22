@@ -4,7 +4,8 @@ import { Link } from 'react-router';
 
 export default class GithubButton extends React.Component {
 	static propTypes = {
-		cta: React.PropTypes.string
+		cta: React.PropTypes.string.isRequired,
+		clickMethod: React.PropTypes.func.isRequired
 	};
 
 	render() {

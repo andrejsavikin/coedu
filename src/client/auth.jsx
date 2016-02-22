@@ -50,6 +50,6 @@ const Auth = {
 
 	}
 
-}
+};
 
-module.exports = Auth;
+export default Auth;

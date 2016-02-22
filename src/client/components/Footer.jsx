@@ -5,6 +5,7 @@ import auth from '../auth.jsx';
 export default class Footer extends React.Component {
 	static propTypes = {
 		user: React.PropTypes.object,
+		loggedIn: React.PropTypes.bool
 	};
 
 	handleLogout() {
@@ -13,7 +14,7 @@ export default class Footer extends React.Component {
 
 	render() {
 		let user = this.props.user;
-		if(user)
+		if(this.props.loggedIn)
 			return (
 				<footer>
 					<Link to={`/`}>
