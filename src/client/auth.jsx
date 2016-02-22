@@ -25,6 +25,7 @@ const Auth = {
 	},
 
 	logout(cb) {
+		console.log("Logged out!");
 		delete sessionStorage.user;
 		if (cb) cb();
 		this.onChange(false);
