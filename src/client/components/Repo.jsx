@@ -8,13 +8,12 @@ export default class Repo extends React.Component {
 
 	render() {
 		let repo = this.props.repo;
-		let url = repo.path ? repo.path : "clone repository →";
 		let isCloned = repo.path ? 'Repo--isCloned': '';
 
 		return (
 			<div className={"Repo " + isCloned}>
 				<h2 className="Repo__Name"> {repo.name} </h2>
-				<small className="Repo__Meta"> {url} </small>
+				<small className="Repo__Meta"> {repo.path || "clone repository →"} </small>
 			</div>
 		);
 	}

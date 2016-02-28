@@ -5,9 +5,9 @@ export default class ReposList extends React.Component {
 
  	state = {
 		data: [
-			{id: 0, name: "Cactomain", url: "https://github.com/vanjek/cactomain", path: "~/coedu/learning-git/"},
-			{id: 1, name: "Learning Git", url: "https://github.com/vanjek/learning"},
-			{id: 2, name: "Coedu Electron App", url: "https://github.com/rista404/coedu", path: "~/coedu/core/"},
+			{id: 0, name: "vanjek/cactomain", url: "https://github.com/vanjek/cactomain", path: "~/coedu/learning-git/"},
+			{id: 1, name: "terza/learning-git", url: "https://github.com/vanjek/learning"},
+			{id: 2, name: "coedu/coedu-core", url: "https://github.com/rista404/coedu", path: "~/coedu/core/"},
 			{id: 3, name: "teslabg/maturski", url: "https://github.com/teslabg/maturski"},
 		]
 	}
