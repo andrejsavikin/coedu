@@ -1,3 +1,5 @@
+import getGithubAuthToken from './getGithubAuthToken.js';
+
 const Auth = {
 
 	login(cb) {
@@ -9,6 +11,12 @@ const Auth = {
 			return;
 		}
 
+		getGithubAuthToken((err, token) => {
+			if(err) throw err;
+
+			console.log(token);
+		});
+
 		let user = {
 			fullName: "Nikola Ristić",
 			username: "rista404",
@@ -16,6 +24,8 @@ const Auth = {
 			organization: "ETŠ Nikola Tesla",
 			token: "1023812937128471359238401293"
 		};
+
+	
 
 		// Pretend sucessfull login
 		sessionStorage.setItem("user", JSON.stringify( user ));
