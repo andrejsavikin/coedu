@@ -1,4 +1,5 @@
 import getGithubAuthToken from './getGithubAuthToken.js';
+import github from './github.js';
 
 const Auth = {
 
@@ -15,23 +16,31 @@ const Auth = {
 			if(err) throw err;
 
 			console.log(token);
+
+			// Save token
+			sessionStorage.setItem('token', token);
+
+			// Auth with token
+			github.authenticate({
+			    type: "oauth",
+			    token: token
+			});
+
+			// Get user info
+			github.user.get({}, (err, user) => {
+				if(err) throw err;
+
+				console.log(user);
+				console.log("Logged in!");
+
+				// Save user to session storage
+				sessionStorage.setItem("user", JSON.stringify( user ));
+
+				if (cb) cb(true);
+				this.onChange(true, JSON.parse(sessionStorage.getItem("user")));
+
+			});
 		});
-
-		let user = {
-			fullName: "Nikola Ristić",
-			username: "rista404",
-			team: "III/7",
-			organization: "ETŠ Nikola Tesla",
-			token: "1023812937128471359238401293"
-		};
-
-	
-
-		// Pretend sucessfull login
-		sessionStorage.setItem("user", JSON.stringify( user ));
-		console.log("Logged in!");
-		if (cb) cb(true);
-		this.onChange(true, JSON.parse(sessionStorage.getItem("user")));
 	},
 
 	logout(cb) {
@@ -42,9 +51,7 @@ const Auth = {
 	},
 
 	getToken() {
-		if(!sessionStorage.user) return undefined;
-
-		return JSON.parse(sessionStorage.getItem("user")).token;
+		return sessionStorage.setItem('token');
 	},
 
 	getUser() {

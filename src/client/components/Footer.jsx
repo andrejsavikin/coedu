@@ -20,7 +20,7 @@ export default class Footer extends React.Component {
 					<Link to={`/`}>
 						<img onClick={this.handleLogout} className="logout" src={"images/logout.svg"} />
 					</Link>
-					<span className="user-info">{ user.fullName } ¬ { user.team } ¬ { user.organization }</span>
+					<span className="user-info">{ user.name } ¬ { user.login }</span>
 				</footer>
 			);
 		else
