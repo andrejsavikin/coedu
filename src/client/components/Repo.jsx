@@ -12,7 +12,7 @@ export default class Repo extends React.Component {
 
 		return (
 			<div className={"Repo " + isCloned}>
-				<h2 className="Repo__Name"> {repo.name} </h2>
+				<h2 className="Repo__Name"> {repo.owner.login}/{repo.name} </h2>
 				<small className="Repo__Meta"> {repo.path || "clone repository →"} </small>
 			</div>
 		);
