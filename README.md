@@ -1,8 +1,9 @@
 # Coedu
 
-### Currently in development
+App is currently in development
 
 ## Instructions
 
-`npm install`
-`npm start`
+Build: `npm install`
+
+Start: `npm start`
