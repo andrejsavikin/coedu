@@ -1,5 +1,5 @@
 import getGithubAuthToken from './getGithubAuthToken.js';
-import github from './github.js';
+import api from './github.js';
 
 const Auth = {
 
@@ -21,13 +21,13 @@ const Auth = {
 			sessionStorage.setItem('token', token);
 
 			// Auth with token
-			github.authenticate({
+			api.authenticate({
 			    type: "oauth",
 			    token: token
 			});
 
 			// Get user info
-			github.user.get({}, (err, user) => {
+			api.user.get({}, (err, user) => {
 				if(err) throw err;
 
 				console.log(user);

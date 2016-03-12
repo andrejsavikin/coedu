@@ -17,7 +17,7 @@ export default function getGithubAuthToken(callback) {
 	let authWindow = new BrowserWindow({ width: 800, height: 600, show: false, 'node-integration': false });
 	let githubUrl = 'https://github.com/login/oauth/authorize?';
 	let authUrl = githubUrl + 'client_id=' + options.client_id + '&scope=' + options.scopes;
-	authWindow.loadUrl(authUrl);
+	authWindow.loadURL(authUrl);
 	authWindow.show();
 
 	authWindow.webContents.on('did-get-redirect-request', function(event, oldUrl, newUrl) {

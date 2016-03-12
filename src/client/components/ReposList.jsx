@@ -1,5 +1,5 @@
 import React from 'react';
-import github from '../github.js';
+import api from '../github.js';
 
 import Repo from './Repo.jsx';
 
@@ -10,7 +10,7 @@ export default class ReposList extends React.Component {
 	}
 
 	componentWillMount() {
-		github.repos.getAll({sort: "updated", type: "owner"}, (err, repos) => {
+		api.repos.getAll({sort: "updated", type: "owner"}, (err, repos) => {
 
 			if(err) throw err;
 

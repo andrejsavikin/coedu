@@ -37,9 +37,14 @@
   "dependencies": {
     "electron-prebuilt": "^0.36.7",
     "github": "^0.2.4",
+    "nodegit": "^0.11.9",
     "normalize.sass": "^3.0.3-2",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-router": "^2.0.0"
+  },
+  "engines": {
+    "electron": "0.36.7",
+    "atom-shell": "0.36.7"
   }
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import auth from '../auth.jsx';
+import git from '../git';
 
 import Footer from './Footer.jsx';
 

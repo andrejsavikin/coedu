@@ -4,7 +4,7 @@ const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 
-require('crash-reporter').start();
+// require('crash-reporter').start();
 
 // Keep a global reference of the swindow object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
