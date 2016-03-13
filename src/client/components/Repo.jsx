@@ -54,14 +54,11 @@ export default class Repo extends React.Component {
 			path = this.state.path;
 
 		let repoData = sessionStorage.getItem("repo__" + this.repoName());
-		console.log(this.repoName(), repoData);
-
+		
 		if(repoData) {
 			isCloned = true;
 			path = this.state.path || JSON.parse(repoData).path;
 		}
-
-		console.log(path);
 
 		return (
 			<div className={"Repo " + (isCloned ? 'Repo--isCloned' : '')}>

@@ -21,10 +21,7 @@ const Auth = {
 			sessionStorage.setItem('token', token);
 
 			// Auth with token
-			api.authenticate({
-			    type: "oauth",
-			    token: token
-			});
+			this.auth();
 
 			// Get user info
 			api.user.get({}, (err, user) => {
@@ -43,15 +40,32 @@ const Auth = {
 		});
 	},
 
+	isAuthenticated: false,
+
+	auth() {
+
+		if(this.isAuthenticated) return;
+
+		// Auth with token
+		api.authenticate({
+			type: "oauth",
+			token: this.getToken()
+		});
+
+		this.isAuthenticated = true;
+		console.log("Authenticated!");
+	},
+
 	logout(cb) {
 		console.log("Logged out!");
+		this.isAuthenticated = false;
 		delete sessionStorage.user;
 		if (cb) cb();
 		this.onChange(false);
 	},
 
 	getToken() {
-		return sessionStorage.setItem('token');
+		return sessionStorage.getItem('token');
 	},
 
 	getUser() {
