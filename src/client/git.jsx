@@ -1,7 +1,7 @@
 // import Git from 'nodegit';
 const Git = window.require('nodegit');
 
-export function cloneRepo(url, path) {
+export function cloneRepo(url, path, cb) {
 
 	const GITHUB_TOKEN = window.sessionStorage.getItem("token");
 
@@ -21,11 +21,13 @@ export function cloneRepo(url, path) {
 	Git.Clone(url, path, cloneOptions)
 		.catch(function(err) {
 			console.log(err);
+			if (cb) cb(err, null);
 			return Git.Repository.open(local);
 		})
 		.then(function(repository) {
 			repo = repository;
 			console.log(repository);
+			if (cb) cb(null, {repository, path});
 		});
 
 	return repo;

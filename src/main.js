@@ -37,6 +37,8 @@ function createWindow () {
 
 }
 
+global["__dirname"] = __dirname;
+
 app.on('ready', createWindow);
 
 // Quit when all windows are closed.
