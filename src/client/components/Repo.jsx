@@ -13,7 +13,8 @@ export default class Repo extends React.Component {
 
 	state = {
 		isCloned: false,
-		path: null
+		path: null,
+		cloning: false
 	}
 
 	constructor(props) {
@@ -23,18 +24,24 @@ export default class Repo extends React.Component {
 	repoName = () => this.props.repo.owner.login + "/" + this.props.repo.name;
 
 	repoData = () => {
-		let data = sessionStorage.getItem( "repo__" + this.repoName() );
+		let data = localStorage.getItem( "repo__" + this.repoName() );
 
 		if(data) return JSON.parse(data);
 	}
 
 	cloneRepo = () => {
 
+		// Cancel if already cloned
 		if(this.state.isCloned || this.repoData()) return;
+
+		this.setState({
+			cloning: true
+		});
 
 		// path for the cloning
 		const path =  window.require('path').join(remote.getGlobal("__dirname"), "../repos", this.repoName() );
 
+		// Clone repo
 		cloneRepo(this.props.repo.html_url, path, (err, res) => {
 			if(err) {
 				console.error(err);
@@ -48,7 +55,7 @@ export default class Repo extends React.Component {
 				path: res.path,
 			});
 
-			sessionStorage.setItem("repo__" + this.repoName(), JSON.stringify( {path: res.path} ));
+			localStorage.setItem("repo__" + this.repoName(), JSON.stringify( {path: res.path} ));
 		});
 
 		
@@ -57,6 +64,7 @@ export default class Repo extends React.Component {
 	render() {
 		let repo = this.props.repo,
 			isCloned = this.state.isCloned,
+			cloning = this.state.cloning,
 			path = this.state.path;
 
 		
@@ -65,10 +73,12 @@ export default class Repo extends React.Component {
 			path = this.state.path || this.repoData().path;
 		}
 
+		let repoMeta = path || (cloning ? "cloning..." : "clone repository →");
+
 		return (
 			<div className={"Repo " + (isCloned ? 'Repo--isCloned' : '')}>
 				<h2 className="Repo__Name"> {this.repoName()} </h2>
-				<small className="Repo__Meta" onClick={this.cloneRepo} > {path || "clone repository →"} </small>
+				<small className="Repo__Meta" onClick={this.cloneRepo} > {repoMeta} </small>
 			</div>
 		);
 	}

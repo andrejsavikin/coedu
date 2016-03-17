@@ -3,7 +3,7 @@ const Git = window.require('nodegit');
 
 export function cloneRepo(url, path, cb) {
 
-	const GITHUB_TOKEN = window.sessionStorage.getItem("token");
+	const GITHUB_TOKEN = window.localStorage.getItem("token");
 
 	const cloneOptions = {};
 	let repo;
