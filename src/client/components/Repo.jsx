@@ -22,9 +22,15 @@ export default class Repo extends React.Component {
 
 	repoName = () => this.props.repo.owner.login + "/" + this.props.repo.name;
 
+	repoData = () => {
+		let data = sessionStorage.getItem( "repo__" + this.repoName() );
+
+		if(data) return JSON.parse(data);
+	}
+
 	cloneRepo = () => {
 
-		if(this.state.isCloned) return;
+		if(this.state.isCloned || this.repoData()) return;
 
 		// path for the cloning
 		const path =  window.require('path').join(remote.getGlobal("__dirname"), "../repos", this.repoName() );
@@ -53,11 +59,10 @@ export default class Repo extends React.Component {
 			isCloned = this.state.isCloned,
 			path = this.state.path;
 
-		let repoData = sessionStorage.getItem("repo__" + this.repoName());
 		
-		if(repoData) {
+		if(this.repoData()) {
 			isCloned = true;
-			path = this.state.path || JSON.parse(repoData).path;
+			path = this.state.path || this.repoData().path;
 		}
 
 		return (
