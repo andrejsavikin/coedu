@@ -6,7 +6,8 @@ import Repo from './Repo.jsx';
 export default class ReposList extends React.Component {
 
  	state = {
-		repos: []
+		repos: [],
+		loaded: false
 	}
 
 	componentWillMount() {
@@ -16,7 +17,8 @@ export default class ReposList extends React.Component {
 
 			console.log(repos);
 			this.setState({
-				repos
+				repos,
+				loaded: true
 			})
 		});
 	}
@@ -24,18 +26,18 @@ export default class ReposList extends React.Component {
 	render() {
 		return (
 			<div className="ReposList">
-			{
-				this.state.repos.sort( function(a, b) {
-					if( a.path && b.path )
-						return 0;
-					if( a.path )
-						return -1;
-					if( b.path )
-						return 1;
-					}).map( repo => (
-						<Repo key={repo.id} repo={repo} />
-					))
-			}
+				{ this.state.loaded ?
+					this.state.repos.sort( function(a, b) {
+						if( a.path && b.path )
+							return 0;
+						if( a.path )
+							return -1;
+						if( b.path )
+							return 1;
+						}).map( repo => (
+							<Repo key={repo.id} repo={repo} />
+						))
+				: <h1 className="loading">Loading...</h1>}
 			</div>
 	);
   }

@@ -59,7 +59,7 @@ const Auth = {
 	logout(cb) {
 		console.log("Logged out!");
 		this.isAuthenticated = false;
-		delete sessionStorage.user;
+		sessionStorage.clear();
 		if (cb) cb();
 		this.onChange(false);
 	},

@@ -158,6 +158,11 @@ html, body {
 a, a:focus, a:visited, a:active, a:hover {
   text-decoration: none; }
 
+.loading {
+  font-size: 18px;
+  padding: 10px 0;
+  text-align: center; }
+
 .Login {
   text-align: center;
   display: flex;
