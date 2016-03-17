@@ -39,10 +39,10 @@ export default class Repo extends React.Component {
 		});
 
 		// path for the cloning
-		const reposPath =  window.require('path').join(remote.getGlobal("__dirname"), "../repos", this.repoName() );
+		const repoPath =  window.require('path').join(remote.getGlobal("__dirname"), "../repos", this.repoName() );
 
 		// Clone repo
-		cloneRepo(this.props.repo.html_url, reposPath, (err, res) => {
+		cloneRepo(this.props.repo.html_url, repoPath, (err, res) => {
 			if(err) {
 				console.error(err);
 				return;
