@@ -1,5 +1,10 @@
 import getGithubAuthToken from './getGithubAuthToken.js';
 import api from './github.js';
+import rmdir from './utils/rmdir.js';
+
+// For accessing the __dirname global var
+const { remote } = window.require('electron');
+const reposPath =  window.require('path').join(remote.getGlobal("__dirname"), "../repos");
 
 const Auth = {
 
@@ -60,6 +65,9 @@ const Auth = {
 		console.log("Logged out!");
 		this.isAuthenticated = false;
 		localStorage.clear();
+
+		rmdir(reposPath);
+
 		if (cb) cb();
 		this.onChange(false);
 	},
