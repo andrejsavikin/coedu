@@ -74,10 +74,17 @@ export default class Repo extends React.Component {
 		}
 
 		let repoMeta = path || (cloning ? "cloning..." : "clone repository →");
+		let repoName = this.repoName().toString();
+
+		console.log("ime", repoName);
 
 		return (
 			<div className={"Repo " + (isCloned ? 'Repo--isCloned' : '')}>
-				<h2 className="Repo__Name"> {this.repoName()} </h2>
+				{isCloned ? 
+					<h2 className="Repo__Name"> <Link to={"/repo/" + repoName}> {repoName} </Link> </h2>
+				: 
+					<h2 className="Repo__Name">{repoName}</h2>
+				}
 				<small className="Repo__Meta" onClick={this.cloneRepo} > {repoMeta} </small>
 			</div>
 		);

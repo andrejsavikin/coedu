@@ -11,12 +11,14 @@ import { requireAuth, isLoggedIn } from './routeHooks.jsx';
 import App from './components/App.jsx';
 import Login from './components/Login.jsx';
 import ReposList from './components/ReposList.jsx';
+import SingleRepo from './components/SingleRepo.jsx';
 
 render((
 	<Router history={hashHistory}>
 		<Route path="/" component={App}>
 			<IndexRoute component={Login} onEnter={isLoggedIn}/>
 			<Route path="/repos" component={ReposList} onEnter={requireAuth}/>
+			<Route path="/repo/:user/:repo" component={SingleRepo} onEnter={requireAuth}/>
 		</Route>
 	</Router>
 	),
