@@ -55,7 +55,7 @@ export default class Repo extends React.Component {
 				path: res.path,
 			});
 
-			localStorage.setItem("repo__" + this.repoName(), JSON.stringify( {path: res.path} ));
+			localStorage.setItem("repo__" + this.repoName(), JSON.stringify( {directory_path: res.path} ));
 		});
 
 		
