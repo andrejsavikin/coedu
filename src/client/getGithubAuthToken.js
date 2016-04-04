@@ -20,13 +20,14 @@ export default function getGithubAuthToken(callback) {
 	authWindow.loadURL(authUrl);
 	authWindow.show();
 
-	authWindow.webContents.on('did-get-redirect-request', function(event, oldUrl, newUrl) {
-		let raw_code = /code=([^&]*)/.exec(newUrl) || null,
+	const handleCallback = function(url) {
+		let raw_code = /code=([^&]*)/.exec(url) || null,
 		code = (raw_code && raw_code.length > 1) ? raw_code[1] : null,
-		error = /\?error=(.+)$/.exec(newUrl);
-		
+		error = /\?error=(.+)$/.exec(url);
+
 		if (code || error) {
 			// Close the browser if code found or error
+			console.log({code, error});
 			authWindow.close();
 		}
 		
@@ -69,6 +70,7 @@ export default function getGithubAuthToken(callback) {
 
 				response.on('error', function (err) {
 					callback(err, null);
+
 				});
 			});
 			
@@ -77,6 +79,15 @@ export default function getGithubAuthToken(callback) {
 		} else if (error) {
 			alert("Oops! Something went wrong and we couldn't log you in using Github. Please try again.");
 		}
+	};
+
+	authWindow.webContents.on('will-navigate', function (event, url) {
+		handleCallback(url);
+	});
+
+
+	authWindow.webContents.on('did-get-redirect-request', function (event, oldUrl, newUrl) {
+		handleCallback(newUrl);
 	});
 
 	// Reset the authWindow on close
