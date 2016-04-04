@@ -65,6 +65,12 @@ const Auth = {
 		this.isAuthenticated = false;
 		localStorage.clear();
 
+		remote.getCurrentWindow().webContents.session.clearStorageData({
+			storages: ["cookies"]
+		}, function(){
+			// callback function
+		});
+
 		shell.moveItemToTrash(reposPath);
 
 		if (cb) cb();
