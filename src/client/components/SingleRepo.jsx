@@ -9,6 +9,7 @@ export default class SingleRepo extends React.Component {
 		loaded: false
 	}
 
+	// Refactor
 	goBack() {
 		location.href = "#/repos";
 	}
@@ -49,9 +50,15 @@ export default class SingleRepo extends React.Component {
 
 		return (
 			<div className="SingleRepo View">
-				<h1> SingleRepo </h1>
-				<h3> {this.props.params.user}/{this.props.params.repo} </h3>
-				<p onClick={this.goBack}>back</p>
+				{this.state.loaded ? (
+					<div>
+						<h2> {this.state.repo.full_name} </h2>
+						<h5> {this.state.repo.html_url} </h5>
+						{this.state.repo.private ? "Private" : "Public"}
+						<p onClick={this.goBack}>back</p>
+					</div>
+				) : <h1> Loading.. </h1> }
+				
 			</div>
 		);
 	}

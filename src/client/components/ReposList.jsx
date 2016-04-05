@@ -11,6 +11,7 @@ export default class ReposList extends React.Component {
 	}
 
 	componentWillMount() {
+
 		api.repos.getAll({sort: "updated", type: "owner"}, (err, repos) => {
 
 			if(err) throw err;
@@ -21,6 +22,7 @@ export default class ReposList extends React.Component {
 				loaded: true
 			})
 		});
+		
 	}
 
 	render() {
