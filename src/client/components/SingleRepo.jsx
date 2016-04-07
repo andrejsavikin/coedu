@@ -53,8 +53,10 @@ export default class SingleRepo extends React.Component {
 				{this.state.loaded ? (
 					<div>
 						<h2> {this.state.repo.full_name} </h2>
-						<h5> {this.state.repo.html_url} </h5>
+						
+						<h5> kalkkjkdfs <a href={this.state.repo.html_url}><img className="external_link" src={"images/planet.svg"} /></a></h5>
 						{this.state.repo.private ? "Private" : "Public"}
+
 						<p onClick={this.goBack}>back</p>
 					</div>
 				) : <h1> Loading.. </h1> }
