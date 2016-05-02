@@ -286,3 +286,25 @@ footer {
     .SingleRepo .SingleRepo__last-commit .SingleRepo__last-commit-text {
       color: #5d627c;
       font-weight: 500; }
+  .SingleRepo .SingleRepo__actions {
+    margin: 20px -20px 10px -20px;
+    background-color: #27282D;
+    padding: 20px 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center; }
+    .SingleRepo .SingleRepo__actions .SingleRepo__action {
+      color: white;
+      font-family: "Roboto Mono", monospace;
+      font-size: 12px;
+      text-align: center;
+      opacity: 0.5;
+      transition: opacity 0.3s; }
+      .SingleRepo .SingleRepo__actions .SingleRepo__action.active {
+        opacity: 1;
+        cursor: pointer; }
+      .SingleRepo .SingleRepo__actions .SingleRepo__action img {
+        height: 32px;
+        margin-bottom: 2px; }
+      .SingleRepo .SingleRepo__actions .SingleRepo__action pre {
+        margin: 0; }

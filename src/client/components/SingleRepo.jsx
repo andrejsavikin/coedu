@@ -8,7 +8,10 @@ export default class SingleRepo extends React.Component {
 	state = {
 		repo: null,
 		loaded: false,
-		lastCommit: ""
+		lastCommit: "",
+		isDirty: false,
+		hasStaged: false,
+		hasCommits: false
 	}
 
 	// Refactor
@@ -40,6 +43,7 @@ export default class SingleRepo extends React.Component {
 
 		this.getRepo(() => {
 			this.getLastCommit();
+			this.getStatus();
 		});
 	}
 
@@ -60,9 +64,17 @@ export default class SingleRepo extends React.Component {
 		if(data) return JSON.parse(data);
 	}
 
-	getLastCommit = (cb) => {
+	getLastCommit = () => {
 		this.repo.getHeadCommit().then(commit => {
 			this.setState( {lastCommit: commit.message()} );
+		});
+	}
+
+	getStatus = () => {
+		this.repo.getStatus().then(status => {
+			if(status.length) {
+				this.setState({isDirty: true});
+			}
 		});
 	}
 
@@ -84,6 +96,21 @@ export default class SingleRepo extends React.Component {
 
 						<section className="SingleRepo__last-commit">
 							<p><span className="SingleRepo__last-commit-text">Last commit:</span> { this.state.lastCommit }</p>
+						</section>
+
+						<section className="SingleRepo__actions">
+							<div className={"SingleRepo__action " + (this.state.isDirty ? "active" : "")}>
+								<img src="images/add-icon.svg" />
+								<pre>git add .</pre>
+							</div>
+							<div className={"SingleRepo__action " + (this.state.hasStaged ? "active" : "")}>
+								<img src="images/commit-icon.svg" />
+								<pre>git commit</pre>
+							</div>
+							<div className={"SingleRepo__action " + (this.state.hasCommits ? "active" : "")}>
+								<img src="images/push-icon.svg" />
+								<pre>git push</pre>
+							</div>
 						</section>
 
 						<p onClick={this.goBack}>back</p>

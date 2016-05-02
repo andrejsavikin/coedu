@@ -49,6 +49,32 @@
 		.SingleRepo__last-commit-text
 			color: darken($shadow, 30%)
 			font-weight: 500
+
+	.SingleRepo__actions
+		margin: 20px -20px 10px -20px
+		background-color: $dark
+		padding: 20px 10px
+		display: flex
+		justify-content: space-around
+		align-items: center
+
+		.SingleRepo__action
+			color: white
+			font-family: $monospace
+			font-size: 12px
+			text-align: center
+			opacity: 0.5
+			transition: opacity 0.3s
+
+			&.active
+				opacity: 1
+				cursor: pointer
+
+			img
+				height: 32px
+				margin-bottom: 2px
+			pre
+				margin: 0
 		
 
 
