@@ -52,14 +52,21 @@ export default class SingleRepo extends React.Component {
 			<div className="SingleRepo View">
 				{this.state.loaded ? (
 					<div>
-						<h2> {this.state.repo.full_name} </h2>
+						<h2 className="SingleRepo__name"> {this.state.repo.full_name} </h2>
 						
-						<h5> kalkkjkdfs <a href={this.state.repo.html_url}><img className="external_link" src={"images/planet.svg"} /></a></h5>
-						{this.state.repo.private ? "Private" : "Public"}
+						<section className="SingleRepo__meta">
+							<span className="SingleRepo__path"> {this.state.repo.directory_path} </span>
+							<span className="SingleRepo__helpers">
+								{this.state.repo.private ? <img className="SingleRepo__private-icon" src="images/octicon.svg" /> : ""}
+								<a className="SingleRepo__external-link" href={this.state.repo.html_url}><img src={"images/planet.svg"} /></a>
+							</span>
+						</section>
+
+						
 
 						<p onClick={this.goBack}>back</p>
 					</div>
-				) : <h1> Loading.. </h1> }
+				) : <h3> Loading.. </h3> }
 				
 			</div>
 		);

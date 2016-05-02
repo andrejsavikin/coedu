@@ -70,7 +70,7 @@ export default class Repo extends React.Component {
 		
 		if(this.repoData()) {
 			isCloned = true;
-			path = this.state.path || this.repoData().path;
+			path = this.repoData().directory_path || this.state.path;
 		}
 
 		let repoMeta = path || (cloning ? "cloning..." : "clone repository →");

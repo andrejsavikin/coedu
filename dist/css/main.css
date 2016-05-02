@@ -211,7 +211,10 @@ a, a:focus, a:visited, a:active, a:hover {
     font-size: 12px;
     font-family: "Roboto Mono", monospace;
     color: #74ED42;
-    cursor: pointer; }
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block; }
   .Repo.Repo--isCloned .Repo__Name {
     color: black;
     cursor: pointer; }
@@ -243,17 +246,35 @@ footer {
 
 .SingleRepo {
   padding: 20px; }
-  .SingleRepo h1 {
-    margin: 0; }
-  .SingleRepo h2 {
-    font-weight: bold;
-    font-size: 14px; }
-  .SingleRepo h5 {
-    opacity: 0.3;
-    border-bottom: 1px dotted gray;
-    padding-bottom: 5px; }
-  .SingleRepo .external_link {
-    width: 20px;
-    height: 20px;
-    float: right;
-    opacity: none; }
+  .SingleRepo .SingleRepo__name {
+    margin: 20px 0 0 0;
+    font-size: 16px;
+    font-weight: 700;
+    color: #27282D;
+    font-family: "Nunito", sans-serif; }
+  .SingleRepo .SingleRepo__meta {
+    padding: 5px 0 5px 0;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px dotted gray; }
+    .SingleRepo .SingleRepo__meta .SingleRepo__path {
+      font-size: 12px;
+      color: #AFB2C3;
+      font-family: "Roboto Mono", monospace;
+      flex: 3;
+      overflow: hidden;
+      text-overflow: ellipsis; }
+    .SingleRepo .SingleRepo__meta .SingleRepo__helpers {
+      flex: 1;
+      text-align: right;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end; }
+      .SingleRepo .SingleRepo__meta .SingleRepo__helpers img {
+        height: 20px; }
+      .SingleRepo .SingleRepo__meta .SingleRepo__helpers img, .SingleRepo .SingleRepo__meta .SingleRepo__helpers a {
+        vertical-align: middle;
+        margin-left: 10px; }
+        .SingleRepo .SingleRepo__meta .SingleRepo__helpers img:first-child, .SingleRepo .SingleRepo__meta .SingleRepo__helpers a:first-child {
+          margin-left: 0; }
