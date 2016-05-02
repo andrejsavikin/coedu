@@ -1,12 +1,14 @@
 import React from 'react';
 import api from '../github';
+const Git = window.require('nodegit');
 
 
 export default class SingleRepo extends React.Component {
 
 	state = {
 		repo: null,
-		loaded: false
+		loaded: false,
+		lastCommit: ""
 	}
 
 	// Refactor
@@ -35,15 +37,33 @@ export default class SingleRepo extends React.Component {
 		}else {
 			console.log("Data cached!", this.repoData());
 		}
-		
+
+		this.getRepo(() => {
+			this.getLastCommit();
+		});
 	}
 
 	repoName = () => this.props.params.user + "/" + this.props.params.repo;
+
+	repo = null
+
+	getRepo = (cb) => {
+		Git.Repository.open(this.repoData().directory_path).then(repository => {
+			this.repo = repository;
+			if(cb) cb();
+		});
+	}
 
 	repoData = () => {
 		let data = localStorage.getItem( "repo__" + this.repoName() );
 
 		if(data) return JSON.parse(data);
+	}
+
+	getLastCommit = (cb) => {
+		this.repo.getHeadCommit().then(commit => {
+			this.setState( {lastCommit: commit.message()} );
+		});
 	}
 
 	render() {
@@ -62,7 +82,9 @@ export default class SingleRepo extends React.Component {
 							</span>
 						</section>
 
-						
+						<section className="SingleRepo__last-commit">
+							<p><span className="SingleRepo__last-commit-text">Last commit:</span> { this.state.lastCommit }</p>
+						</section>
 
 						<p onClick={this.goBack}>back</p>
 					</div>
