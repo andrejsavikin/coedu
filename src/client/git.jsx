@@ -1,5 +1,6 @@
 // import Git from 'nodegit';
 const Git = window.require('nodegit');
+import auth from './auth.jsx';
 
 export function cloneRepo(url, path, cb) {
 
@@ -32,4 +33,28 @@ export function cloneRepo(url, path, cb) {
 
 	return repo;
 
+}
+
+export function addAndCommit(repo, path, message) {
+
+	let index;
+	let oid;
+	return repo.index()
+		.then(indexResult => {
+			index = indexResult;
+		})
+		.then(() => index.addAll())
+		.then(() => index.write())
+		.then(() => index.writeTree())
+		.then(oidResult => {
+			oid = oidResult;
+	  		return Git.Reference.nameToId(repo, "HEAD");
+		})
+		.then(head => repo.getCommit(head))
+		.then(parent => {
+			const user = auth.getUser();
+			let author = Git.Signature.now(user.name, user.email)
+
+			return repo.createCommit("HEAD", author, author, message, oid, [parent]);
+		});
 }

@@ -245,7 +245,16 @@ footer {
     opacity: 0.7; }
 
 .SingleRepo {
-  padding: 20px; }
+  padding: 20px;
+  overflow: hidden;
+  height: 100%; }
+  .SingleRepo .SingleRepo__refresh {
+    position: fixed;
+    top: 8px;
+    right: 8px;
+    width: 16px;
+    cursor: pointer;
+    z-index: 200; }
   .SingleRepo .SingleRepo__name {
     margin: 20px 0 0 0;
     font-size: 16px;
@@ -298,7 +307,7 @@ footer {
       font-family: "Roboto Mono", monospace;
       font-size: 12px;
       text-align: center;
-      opacity: 0.5;
+      opacity: 0.3;
       transition: opacity 0.3s; }
       .SingleRepo .SingleRepo__actions .SingleRepo__action.active {
         opacity: 1;
@@ -307,4 +316,5 @@ footer {
         height: 32px;
         margin-bottom: 2px; }
       .SingleRepo .SingleRepo__actions .SingleRepo__action pre {
-        margin: 0; }
+        margin: 0;
+        font-family: "Roboto Mono", monospace; }

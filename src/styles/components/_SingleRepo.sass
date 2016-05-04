@@ -1,5 +1,15 @@
 .SingleRepo
 	padding: 20px
+	overflow: hidden
+	height: 100%
+
+	.SingleRepo__refresh
+		position: fixed
+		top: 8px
+		right: 8px
+		width: 16px
+		cursor: pointer
+		z-index: 200
 
 	.SingleRepo__name
 		margin: 20px 0 0 0
@@ -63,7 +73,7 @@
 			font-family: $monospace
 			font-size: 12px
 			text-align: center
-			opacity: 0.5
+			opacity: 0.3
 			transition: opacity 0.3s
 
 			&.active
@@ -75,6 +85,7 @@
 				margin-bottom: 2px
 			pre
 				margin: 0
+				font-family: $monospace
 		
 
 

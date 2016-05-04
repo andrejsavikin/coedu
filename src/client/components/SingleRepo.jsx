@@ -1,5 +1,6 @@
 import React from 'react';
 import api from '../github';
+import { addAndCommit } from '../git.jsx';
 const Git = window.require('nodegit');
 
 
@@ -10,7 +11,6 @@ export default class SingleRepo extends React.Component {
 		loaded: false,
 		lastCommit: "",
 		isDirty: false,
-		hasStaged: false,
 		hasCommits: false
 	}
 
@@ -18,6 +18,7 @@ export default class SingleRepo extends React.Component {
 	goBack() {
 		location.href = "#/repos";
 	}
+
 
 	componentWillMount() {
 
@@ -41,13 +42,20 @@ export default class SingleRepo extends React.Component {
 			console.log("Data cached!", this.repoData());
 		}
 
-		this.getRepo(() => {
-			this.getLastCommit();
-			this.getStatus();
-		});
+		this.init();
 	}
 
 	repoName = () => this.props.params.user + "/" + this.props.params.repo;
+
+	init = () => {
+		this.getRepo(() => {
+			this.getLastCommit();
+			this.getStatus();
+			if(this.repo.headDetached()) {
+				this.setState({hasCommits: true});
+			}
+		});
+	}
 
 	repo = null
 
@@ -72,10 +80,21 @@ export default class SingleRepo extends React.Component {
 
 	getStatus = () => {
 		this.repo.getStatus().then(status => {
+			console.log(status)
 			if(status.length) {
 				this.setState({isDirty: true});
 			}
 		});
+	}
+
+	handleAddAndCommit = () => {
+		if(this.state.isDirty) {
+			addAndCommit(this.repo, this.repoData().directory_path, "Jos fali za poruku")
+				.then(commitId => {
+					this.init();
+					this.setState({hasCommits: true, isDirty: false});
+				});
+		}
 	}
 
 	render() {
@@ -84,6 +103,7 @@ export default class SingleRepo extends React.Component {
 			<div className="SingleRepo View">
 				{this.state.loaded ? (
 					<div>
+						<img onClick={this.init} className="SingleRepo__refresh" src="images/refresh.svg" />
 						<h2 className="SingleRepo__name"> {this.state.repo.full_name} </h2>
 						
 						<section className="SingleRepo__meta">
@@ -99,12 +119,12 @@ export default class SingleRepo extends React.Component {
 						</section>
 
 						<section className="SingleRepo__actions">
-							<div className={"SingleRepo__action " + (this.state.isDirty ? "active" : "")}>
+							{/*<div className={"SingleRepo__action " + (this.state.isDirty ? "active" : "")}>
 								<img src="images/add-icon.svg" />
 								<pre>git add .</pre>
-							</div>
-							<div className={"SingleRepo__action " + (this.state.hasStaged ? "active" : "")}>
-								<img src="images/commit-icon.svg" />
+							</div>*/}
+							<div onClick={this.handleAddAndCommit} className={"SingleRepo__action " + (this.state.isDirty ? "active" : "")}>
+								<img src="images/add-icon.svg" />
 								<pre>git commit</pre>
 							</div>
 							<div className={"SingleRepo__action " + (this.state.hasCommits ? "active" : "")}>
