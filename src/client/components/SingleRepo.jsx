@@ -1,5 +1,6 @@
 import React from 'react';
 import api from '../github';
+import auth from '../auth.jsx';
 import { addAndCommit } from '../git.jsx';
 const Git = window.require('nodegit');
 
@@ -51,13 +52,39 @@ export default class SingleRepo extends React.Component {
 		this.getRepo(() => {
 			this.getLastCommit();
 			this.getStatus();
-			if(this.repo.headDetached()) {
-				this.setState({hasCommits: true});
-			}
+			
+			// let commit;
+			// let upstream;
+			// Git.Reference.lookup(this.repo, "refs/remotes/origin/master")
+			// 	.done(reference => upstream = reference.target())
+			// 	.done(() => {
+			// 		commit = this.repo().getHeadCommit();
+			// 		console.log(upstream, commit);
+			// 	})
+			// 	.done(result => {
+			// 		Git.Graph.aheadBehind(this.repo, commit , upstream).done(result => console.log(result));
+			// 	});
+				
 		});
 	}
 
 	repo = null
+
+	getRemote = (cb) => {
+		this.repo.getRemote("origin").then(remote => {
+			cb(remote);
+		})
+	}
+
+	pushToRemote = () => {
+		this.getRemote(remote => {
+			remote.push(["refs/heads/master:refs/heads/master"], {
+		        callbacks: {
+		          credentials(url, userName) { return Git.Cred.userpassPlaintextNew(auth.getToken(), "x-oauth-basic"); }
+		        }
+		      }).done(message => console.log(message));
+		})
+	}
 
 	getRepo = (cb) => {
 		Git.Repository.open(this.repoData().directory_path).then(repository => {
@@ -80,7 +107,6 @@ export default class SingleRepo extends React.Component {
 
 	getStatus = () => {
 		this.repo.getStatus().then(status => {
-			console.log(status)
 			if(status.length) {
 				this.setState({isDirty: true});
 			}
@@ -127,7 +153,7 @@ export default class SingleRepo extends React.Component {
 								<img src="images/add-icon.svg" />
 								<pre>git commit</pre>
 							</div>
-							<div className={"SingleRepo__action " + (this.state.hasCommits ? "active" : "")}>
+							<div onClick={this.pushToRemote} className={"SingleRepo__action active" + (this.state.hasCommits ? "active" : "")}>
 								<img src="images/push-icon.svg" />
 								<pre>git push</pre>
 							</div>
