@@ -3,7 +3,13 @@ import api from './github.js';
 
 // For accessing the __dirname global var
 const { remote, shell } = window.require('electron');
-const reposPath =  window.require('path').join(remote.getGlobal("__dirname"), "../repos");
+
+function getUserHome() {
+	return remote.process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
+}
+
+// path for the cloning
+const reposPath =  window.require('path').join(getUserHome(), "coedu");
 
 const Auth = {
 

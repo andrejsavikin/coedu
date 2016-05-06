@@ -6,6 +6,7 @@ const { remote } = window.require('electron');
 
 import { cloneRepo } from '../git.jsx';
 
+
 export default class Repo extends React.Component {
 	static propTypes = {
 		repo: React.PropTypes.object,
@@ -38,8 +39,12 @@ export default class Repo extends React.Component {
 			cloning: true
 		});
 
+		function getUserHome() {
+			return remote.process.env[(process.platform == 'win32') ? 'USERPROFILE' : 'HOME'];
+		}
+
 		// path for the cloning
-		const repoPath =  window.require('path').join(remote.getGlobal("__dirname"), "../repos", this.repoName() );
+		const repoPath =  window.require('path').join(getUserHome(), "coedu", this.repoName() );
 
 		// Clone repo
 		cloneRepo(this.props.repo.html_url, repoPath, (err, res) => {
