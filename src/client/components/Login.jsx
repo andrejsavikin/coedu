@@ -15,6 +15,7 @@ export default class Login extends React.Component {
 			<div className="Login View">
 				<img className="OctocatImage" src={"./images/octobiwan.jpg"} />
 				<GithubButton cta="Sign In" handleClick={this.handleLogin}/>
+				<small>alpha version</small>
 			</div>
 		);
 	}

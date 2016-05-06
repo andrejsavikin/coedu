@@ -11,7 +11,11 @@ export default class ReposList extends React.Component {
 	}
 
 	componentWillMount() {
+		this.fetchRepos();
+	}
 
+	fetchRepos = () => {
+		this.setState({loaded: false});
 		api.repos.getAll({sort: "updated", type: "owner"}, (err, repos) => {
 
 			if(err) throw err;
@@ -22,24 +26,26 @@ export default class ReposList extends React.Component {
 				loaded: true
 			})
 		});
-		
 	}
 
 	render() {
 		return (
 			<div className="ReposList">
-				{ this.state.loaded ?
-					this.state.repos.sort( function(a, b) {
-						if( a.path && b.path )
-							return 0;
-						if( a.path )
-							return -1;
-						if( b.path )
-							return 1;
-						}).map( repo => (
-							<Repo key={repo.id} repo={repo} />
-						))
-				: <h1 className="loading">Loading...</h1>}
+				<div onClick={this.fetchRepos} className="ReposList__refresh"><img src="images/refresh.svg" /> </div>
+				<div className="Repos">
+					{ this.state.loaded ?
+						this.state.repos.sort( function(a, b) {
+							if( a.path && b.path )
+								return 0;
+							if( a.path )
+								return -1;
+							if( b.path )
+								return 1;
+							}).map( repo => (
+								<Repo key={repo.id} repo={repo} />
+							))
+					: <h1 className="loading">Loading...</h1>}
+				</div>
 			</div>
 	);
   }

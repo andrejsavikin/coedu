@@ -172,6 +172,10 @@ a, a:focus, a:visited, a:active, a:hover {
   .Login .OctocatImage {
     margin: 0 auto;
     max-width: 160px; }
+  .Login small {
+    font-family: "Roboto Mono", monospace;
+    font-size: 10px;
+    color: #AFB2C3; }
 
 .GithubButton {
   padding: 6px 10px;
@@ -194,7 +198,17 @@ a, a:focus, a:visited, a:active, a:hover {
     vertical-align: middle; }
 
 .ReposList {
-  padding: 20px 20px 40px 20px; }
+  padding: 0px 20px 40px 20px; }
+  .ReposList .ReposList__refresh {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    z-index: 200; }
+    .ReposList .ReposList__refresh img {
+      width: 16px; }
+  .ReposList .Repos {
+    padding-top: 20px; }
 
 .Repo {
   padding: 10px 0;
@@ -252,9 +266,10 @@ footer {
     position: fixed;
     top: 8px;
     right: 8px;
-    width: 16px;
     cursor: pointer;
     z-index: 200; }
+    .SingleRepo .SingleRepo__refresh img {
+      width: 16px; }
   .SingleRepo .SingleRepo__name {
     margin: 20px 0 0 0;
     font-size: 16px;
