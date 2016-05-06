@@ -1,6 +1,10 @@
 import React from 'react';
 import api from '../github';
 import auth from '../auth.jsx';
+const electron = window.require('electron');
+const ipcRenderer = electron.ipcRenderer;
+const remote = electron.remote;
+const BrowserWindow = remote.BrowserWindow;
 import { addAndCommit } from '../git.jsx';
 const Git = window.require('nodegit');
 
@@ -132,6 +136,16 @@ export default class SingleRepo extends React.Component {
 		}
 	}
 
+	openPublicRepo = () => {
+		let repoWindow = new BrowserWindow({ width: 1024, height: 768, show: false, 'node-integration': false });
+		repoWindow.loadURL(this.state.repo.html_url);
+		repoWindow.show();
+		// Reset the authWindow on close
+		repoWindow.on('close', function() {
+			repoWindow = null;
+		}, false);
+	}
+
 	render() {
 
 		return (
@@ -145,7 +159,7 @@ export default class SingleRepo extends React.Component {
 							<span className="SingleRepo__path"> {this.state.repo.directory_path} </span>
 							<span className="SingleRepo__helpers">
 								{this.state.repo.private ? <img className="SingleRepo__private-icon" src="images/octicon.svg" /> : ""}
-								<a className="SingleRepo__external-link" href={this.state.repo.html_url}><img src={"images/planet.svg"} /></a>
+								<a className="SingleRepo__external-link" onClick={this.openPublicRepo}><img src={"images/planet.svg"} /></a>
 							</span>
 						</section>
 
