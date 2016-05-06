@@ -233,8 +233,9 @@ a, a:focus, a:visited, a:active, a:hover {
     text-overflow: ellipsis;
     display: block; }
   .Repo.Repo--isCloned .Repo__Name {
-    color: black;
-    cursor: pointer; }
+    color: black; }
+    .Repo.Repo--isCloned .Repo__Name a {
+      cursor: pointer; }
   .Repo.Repo--isCloned .Repo__Meta {
     color: #AFB2C3;
     cursor: initial; }
