@@ -5,7 +5,7 @@ const electron = window.require('electron');
 const ipcRenderer = electron.ipcRenderer;
 const remote = electron.remote;
 const BrowserWindow = remote.BrowserWindow;
-const dialog = remote.dialog;
+const shell = remote.shell;
 import { findDOMNode } from 'react-dom';
 import { addAndCommit } from '../git.jsx';
 const Git = window.require('nodegit');
@@ -18,7 +18,8 @@ export default class SingleRepo extends React.Component {
 		loaded: false,
 		lastCommit: "",
 		isDirty: false,
-		showMessageInput: false
+		showMessageInput: false,
+		errorMessage: null
 	}
 
 	// Refactor
@@ -32,7 +33,11 @@ export default class SingleRepo extends React.Component {
 		if( !this.repoData.owner ) {
 			api.repos.get({user: this.props.params.user, repo: this.props.params.repo}, (err, repo) => {
 
-				if(err) throw err;
+				if(err) {
+					this.setState({loaded: true, errorMessage: err.message});
+					throw err;
+					return;
+				}
 
 				let fullRepo = Object.assign(repo, JSON.parse( localStorage.getItem("repo__" + this.repoName()) ) );
 
@@ -169,6 +174,7 @@ export default class SingleRepo extends React.Component {
 
 		return (
 			<div className="SingleRepo View">
+				{this.state.errorMessage && <h3 className="loading error">{this.state.errorMessage}</h3>}
 				{this.state.loaded ? (
 					<div>
 						<img onClick={this.init} className="SingleRepo__refresh" src="images/refresh.svg" />
@@ -202,9 +208,15 @@ export default class SingleRepo extends React.Component {
 							</div>
 						</section>
 
-						<p onClick={this.goBack}>back</p>
+						<section className="SingleRepo__shortcuts">
+							<div onClick={() => {shell.openItem(this.state.repo.directory_path)}}>
+								<img src="images/folder.svg" />
+								<pre>explore repo</pre>
+							</div>
+						</section>
+
 					</div>
-				) : <h3> Loading.. </h3> }
+				) : <h3 className="loading">Loading...</h3> }
 				
 			</div>
 		);

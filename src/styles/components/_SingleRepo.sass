@@ -1,7 +1,7 @@
 .SingleRepo
 	padding: 20px
 	overflow: hidden
-	height: 100%
+	height: auto
 
 	.SingleRepo__refresh
 		position: fixed
@@ -109,6 +109,23 @@
 			pre
 				margin: 0
 				font-family: $monospace
+
+	.SingleRepo__shortcuts
+		padding: 10px 10px
+		text-align: center
+		position: relative
+
+		& > div
+			cursor: pointer
+
+		img
+			height: 32px
+
+		pre
+			margin: 5px 0 0 0 
+			font-family: $monospace
+			font-size: 12px
+			font-weight: 700
 		
 
 

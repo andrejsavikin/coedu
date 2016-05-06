@@ -44,7 +44,7 @@ export default class ReposList extends React.Component {
 							}).map( repo => (
 								<Repo key={repo.id} repo={repo} />
 							))
-					: <h1 className="loading">Loading...</h1>}
+					: <h3 className="loading">Loading...</h3>}
 				</div>
 			</div>
 	);

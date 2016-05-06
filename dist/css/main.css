@@ -161,7 +161,10 @@ a, a:focus, a:visited, a:active, a:hover {
 .loading {
   font-size: 18px;
   padding: 10px 0;
+  font-family: "Roboto Mono", monospace;
   text-align: center; }
+  .loading.error {
+    color: red; }
 
 .Login {
   text-align: center;
@@ -261,7 +264,7 @@ footer {
 .SingleRepo {
   padding: 20px;
   overflow: hidden;
-  height: 100%; }
+  height: auto; }
   .SingleRepo .SingleRepo__refresh {
     position: fixed;
     top: 8px;
@@ -350,3 +353,16 @@ footer {
       .SingleRepo .SingleRepo__actions .SingleRepo__action pre {
         margin: 0;
         font-family: "Roboto Mono", monospace; }
+  .SingleRepo .SingleRepo__shortcuts {
+    padding: 10px 10px;
+    text-align: center;
+    position: relative; }
+    .SingleRepo .SingleRepo__shortcuts > div {
+      cursor: pointer; }
+    .SingleRepo .SingleRepo__shortcuts img {
+      height: 32px; }
+    .SingleRepo .SingleRepo__shortcuts pre {
+      margin: 5px 0 0 0;
+      font-family: "Roboto Mono", monospace;
+      font-size: 12px;
+      font-weight: 700; }
