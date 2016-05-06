@@ -178,7 +178,7 @@ export default class SingleRepo extends React.Component {
 				{this.state.loaded ? (
 					<div>
 						<img onClick={this.init} className="SingleRepo__refresh" src="images/refresh.svg" />
-						<h2 className="SingleRepo__name"> {this.state.repo.full_name} </h2>
+						<h2 className="SingleRepo__name"><span className="SingleRepo__go-back" onClick={this.goBack}>&larr;</span>{this.state.repo.full_name} </h2>
 						
 						<section className="SingleRepo__meta">
 							<span className="SingleRepo__path"> {this.state.repo.directory_path} </span>
