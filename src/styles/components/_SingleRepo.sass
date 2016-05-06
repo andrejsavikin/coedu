@@ -65,6 +65,23 @@
 			color: darken($shadow, 30%)
 			font-weight: 500
 
+
+	.SingleRepo__messageInput
+		position: absolute
+		left: 0
+		right: 0
+		width: 100%
+		z-index: 200
+		top: 0
+		bottom: 0
+		background-color: #27282D
+		border: none
+		padding: 0 20px
+		color: white
+
+		&:focus
+			outline: none
+
 	.SingleRepo__actions
 		margin: 20px -20px 10px -20px
 		background-color: $dark
@@ -72,6 +89,7 @@
 		display: flex
 		justify-content: space-around
 		align-items: center
+		position: relative
 
 		.SingleRepo__action
 			color: white

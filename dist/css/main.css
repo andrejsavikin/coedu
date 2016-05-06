@@ -312,13 +312,28 @@ footer {
     .SingleRepo .SingleRepo__last-commit .SingleRepo__last-commit-text {
       color: #5d627c;
       font-weight: 500; }
+  .SingleRepo .SingleRepo__messageInput {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 200;
+    top: 0;
+    bottom: 0;
+    background-color: #27282D;
+    border: none;
+    padding: 0 20px;
+    color: white; }
+    .SingleRepo .SingleRepo__messageInput:focus {
+      outline: none; }
   .SingleRepo .SingleRepo__actions {
     margin: 20px -20px 10px -20px;
     background-color: #27282D;
     padding: 20px 10px;
     display: flex;
     justify-content: space-around;
-    align-items: center; }
+    align-items: center;
+    position: relative; }
     .SingleRepo .SingleRepo__actions .SingleRepo__action {
       color: white;
       font-family: "Roboto Mono", monospace;

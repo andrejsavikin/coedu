@@ -5,6 +5,8 @@ const electron = window.require('electron');
 const ipcRenderer = electron.ipcRenderer;
 const remote = electron.remote;
 const BrowserWindow = remote.BrowserWindow;
+const dialog = remote.dialog;
+import { findDOMNode } from 'react-dom';
 import { addAndCommit } from '../git.jsx';
 const Git = window.require('nodegit');
 
@@ -15,7 +17,8 @@ export default class SingleRepo extends React.Component {
 		repo: null,
 		loaded: false,
 		lastCommit: "",
-		isDirty: false
+		isDirty: false,
+		showMessageInput: false
 	}
 
 	// Refactor
@@ -126,9 +129,9 @@ export default class SingleRepo extends React.Component {
 		if(cb) cb();
 	}
 
-	handleAddAndCommit = () => {
+	handleAddAndCommit = (commitMessage) => {
 		if(this.state.isDirty) {
-			addAndCommit(this.repo, this.repoData().directory_path, "Jos fali za poruku")
+			addAndCommit(this.repo, this.repoData().directory_path, commitMessage)
 				.then(commitId => {
 					this.modifyHasCommits(true, () => this.init());
 					this.setState({isDirty: false});
@@ -144,6 +147,20 @@ export default class SingleRepo extends React.Component {
 		repoWindow.on('close', function() {
 			repoWindow = null;
 		}, false);
+	}
+
+	handleKeyPress = (e) => {
+		if(e.key === 'Enter' && this.refs.commitMessage.value !== '') {
+			let commitMessage = this.refs.commitMessage.value;
+			this.refs.commitMessage.value = '';
+			this.setState({showMessageInput: false});
+			this.handleAddAndCommit(commitMessage);
+		}
+	}
+
+	handleCommitButtonPress = () => {
+		this.setState({showMessageInput: true});
+		setTimeout(() => this.refs.commitMessage.focus(), 5)
 	}
 
 	render() {
@@ -172,7 +189,8 @@ export default class SingleRepo extends React.Component {
 								<img src="images/add-icon.svg" />
 								<pre>git add .</pre>
 							</div>*/}
-							<div onClick={this.handleAddAndCommit} className={"SingleRepo__action " + (this.state.isDirty ? "active" : "")}>
+							{this.state.showMessageInput && <input onKeyPress={this.handleKeyPress} placeholder="Commit message here.." className="SingleRepo__messageInput" ref="commitMessage" />}
+							<div onClick={this.handleCommitButtonPress} className={"SingleRepo__action " + (this.state.isDirty ? "active" : "")}>
 								<img src="images/add-icon.svg" />
 								<pre>git commit</pre>
 							</div>
