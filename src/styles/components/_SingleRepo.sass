@@ -74,6 +74,7 @@
 
 	.SingleRepo__messageInput
 		position: absolute
+		font-family: $monospace
 		left: 0
 		right: 0
 		width: 100%
@@ -84,6 +85,7 @@
 		border: none
 		padding: 0 20px
 		color: white
+		overflow-x: auto
 
 		&:focus
 			outline: none
@@ -96,6 +98,7 @@
 		justify-content: space-around
 		align-items: center
 		position: relative
+		overflow: hidden
 
 		.SingleRepo__action
 			color: white
@@ -120,6 +123,7 @@
 		padding: 10px 10px
 		text-align: center
 		position: relative
+		opacity: 0.85
 
 		& > div
 			cursor: pointer

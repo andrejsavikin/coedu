@@ -322,6 +322,7 @@ footer {
       font-weight: 500; }
   .SingleRepo .SingleRepo__messageInput {
     position: absolute;
+    font-family: "Roboto Mono", monospace;
     left: 0;
     right: 0;
     width: 100%;
@@ -331,7 +332,8 @@ footer {
     background-color: #27282D;
     border: none;
     padding: 0 20px;
-    color: white; }
+    color: white;
+    overflow-x: auto; }
     .SingleRepo .SingleRepo__messageInput:focus {
       outline: none; }
   .SingleRepo .SingleRepo__actions {
@@ -341,7 +343,8 @@ footer {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    position: relative; }
+    position: relative;
+    overflow: hidden; }
     .SingleRepo .SingleRepo__actions .SingleRepo__action {
       color: white;
       font-family: "Roboto Mono", monospace;
@@ -361,7 +364,8 @@ footer {
   .SingleRepo .SingleRepo__shortcuts {
     padding: 10px 10px;
     text-align: center;
-    position: relative; }
+    position: relative;
+    opacity: 0.85; }
     .SingleRepo .SingleRepo__shortcuts > div {
       cursor: pointer; }
     .SingleRepo .SingleRepo__shortcuts img {
