@@ -159,8 +159,10 @@ export default class SingleRepo extends React.Component {
 	}
 
 	handleCommitButtonPress = () => {
-		this.setState({showMessageInput: true});
-		setTimeout(() => this.refs.commitMessage.focus(), 5)
+		if(this.state.isDirty) {
+			this.setState({showMessageInput: true});
+			setTimeout(() => this.refs.commitMessage.focus(), 5);
+		}
 	}
 
 	render() {
