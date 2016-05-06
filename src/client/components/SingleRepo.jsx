@@ -11,8 +11,7 @@ export default class SingleRepo extends React.Component {
 		repo: null,
 		loaded: false,
 		lastCommit: "",
-		isDirty: false,
-		hasCommits: false
+		isDirty: false
 	}
 
 	// Refactor
@@ -82,7 +81,11 @@ export default class SingleRepo extends React.Component {
 		        callbacks: {
 		          credentials(url, userName) { return Git.Cred.userpassPlaintextNew(auth.getToken(), "x-oauth-basic"); }
 		        }
-		      }).done(message => console.log(message));
+		      }).then(message => console.log(message))
+				.then(() => {
+					this.modifyHasCommits(false, () => this.init());
+
+				});
 		})
 	}
 
@@ -113,13 +116,19 @@ export default class SingleRepo extends React.Component {
 		});
 	}
 
+	modifyHasCommits = (bool, cb) => {
+		let updatedData = JSON.stringify(Object.assign(this.repoData(), {hasCommits: bool}));
+		localStorage.setItem( "repo__" + this.repoName(), updatedData );
+		if(cb) cb();
+	}
+
 	handleAddAndCommit = () => {
 		if(this.state.isDirty) {
 			addAndCommit(this.repo, this.repoData().directory_path, "Jos fali za poruku")
 				.then(commitId => {
-					this.init();
-					this.setState({hasCommits: true, isDirty: false});
-				});
+					this.modifyHasCommits(true, () => this.init());
+					this.setState({isDirty: false});
+				}).catch(error => console.error(error));
 		}
 	}
 
@@ -153,7 +162,7 @@ export default class SingleRepo extends React.Component {
 								<img src="images/add-icon.svg" />
 								<pre>git commit</pre>
 							</div>
-							<div onClick={this.pushToRemote} className={"SingleRepo__action active" + (this.state.hasCommits ? "active" : "")}>
+							<div onClick={this.pushToRemote} className={"SingleRepo__action " + (this.repoData().hasCommits ? "active" : "")}>
 								<img src="images/push-icon.svg" />
 								<pre>git push</pre>
 							</div>
