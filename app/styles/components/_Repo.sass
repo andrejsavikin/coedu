@@ -1,0 +1,32 @@
+.Repo
+	padding: 10px 0
+	border-bottom: 1px dotted $shadow
+
+	.Repo__Name, .Repo__Name a
+		font-size: 16px
+		margin: 0
+		padding: 3px 0
+		font-weight: 300
+		color: $shadow
+
+	.Repo__Name a
+		color: black
+
+	.Repo__Meta
+		font-size: 12px
+		font-family: $monospace
+		color: $emerald
+		cursor: pointer
+		overflow: hidden
+		text-overflow: ellipsis
+		display: block
+		
+
+	&.Repo--isCloned
+		.Repo__Name
+			color: black
+			a
+				cursor: pointer
+		.Repo__Meta
+			color: $shadow
+			cursor: initial
